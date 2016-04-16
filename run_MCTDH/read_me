@@ -3,3 +3,10 @@
 #***************
 # This folder stores all the scripts to generate MCTDH operator files from
 # the Matlab weight and biases
+
+1. chane the number of neurons in all the fortran scripts as well as python script
+2. run sim.sh
+3. put the number of rows in the train file
+4. HFCO.op file is creatd
+5. Need to add kinetic energy operator in the hamiltonian section of the operator
+   all the 1D cut hamiltonian
