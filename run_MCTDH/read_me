@@ -1,0 +1,5 @@
+#***************
+#*
+#***************
+# This folder stores all the scripts to generate MCTDH operator files from
+# the Matlab weight and biases
