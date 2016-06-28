@@ -9,6 +9,11 @@ import math
 import sys
 from  numpy import *
 
+##
+# This program reads input templet file
+# and generates molpro input files for different geometries
+# coord file contains geometries
+
 path = "./"
 
 coord_file = open(path+"coord",'r') 
