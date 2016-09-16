@@ -12,6 +12,14 @@ import sys
 import os
 import math
 
+#---------------------------------------
+#	First copy HFCO.LW, HFCO.b to LW and b respectively. 
+#	These are later used as input for new_genop.py
+#---------------------------------------
+
+os.system("cp HFCO.LW LW")
+os.system("cp HFCO.b b")
+
 #----------------------------------------
 #	This block is for determining maximum and minimum for each column (coordinates and energy)
 #----------------------------------------
@@ -50,10 +58,10 @@ for i in xrange(nod):
 fc_in = open("HFCO.c","r")
 C_old = fc_in.readlines()
 fc_in.close()
-c = C_old[0].split()[0]
+C = C_old[0].split()[0]
 
-fc_new = open("C","w")
-cnew = float(c)*rng[nod-1]*0.50 + mn[nod-1] + 0.50*rng[nod-1]
+fc_new = open("c","w")
+cnew = float(C)*rng[nod-1]*0.50 + mn[nod-1] + 0.50*rng[nod-1]
 fc_new.write(" %15.10f " %cnew)
 fc_new.close()
 

@@ -2,9 +2,12 @@
 #* Copyright (C) 2016 Ekadashi Pradhan, Alex Brown
 #*
 #******************************************************
-
+#
+#	This script generates MCTDH operator file
+#
 #! /usr/bin/env python
 import os
+import sys
 import math
 from  numpy import *
 
@@ -17,13 +20,14 @@ LW_file = open(path+"LW",'r')
 rd_file = open(path+"rd",'r')
 b_file = open(path+"b",'r')
 c_file = open(path+"c",'r')
+
 nofd = 6 #Number of degrees of freedom
-nofn = 60 #Number of Neurons
+nofn = 100 #Number of Neurons
 
 IW_ini = []
 IW = []
 v = []
-#coord = [3.446,2.488,2.4714,0.8619,-0.2519,3.14285] #here minimum TRANS of HFCO
+#coord = [3.446,2.488,2.4714,0.8619,-0.2519,3.14285] # TRANS HFCO minimum
 coord = [2.0632,2.534,2.22874,-0.6138,-0.54038,3.14285] #coordinates of EQ HFCO
 
 for i in range(nofn):
@@ -46,9 +50,9 @@ LW = LW_ini.split()
 rd = rd_ini.split()
 b = b_ini.split()
 
-print len(LW)
-print len(rd)
-print len(b)
+#print len(LW)
+#print len(rd)
+#print len(b)
 
 IW_file.close()
 LW_file.close()
@@ -101,4 +105,4 @@ for i in range(nofn):
 V = 0.0
 for i in range(nofn):
     V = V + float(LW[i])*v[i]*exp(float(b[i]))*float(rd[i])
-print V+float(c)
+print "eq-HFCO =",V+float(c)
