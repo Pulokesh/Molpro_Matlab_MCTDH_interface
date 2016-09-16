@@ -2,29 +2,32 @@
 #* Copyright (C) 2016 Ekadashi Pradhan
 #*
 #******************************************************
-# 	This PYTHON code generates rescaled parameters, LW, IW, b, c, rd
+#
+# 	This PYTHON code generates rescaled parameters IW, b, c, rd
 #	later used in new_genop.py code to generate MCTDH operator file
+#
+#-----------------------------------------------------
 
 import sys
 import os
 import math
 
 #----------------------------------------
-#	This block is for determining maximum and minimum for each column
+#	This block is for determining maximum and minimum for each column (coordinates and energy)
 #----------------------------------------
 
-fin = open("train","r")
-Ain = fin.readlines()
-fin.close()
+f_in = open("train","r")
+Ain = f_in.readlines()
+f_in.close()
 LN = len(Ain)
 
 print "length of train set=",LN
 
 for i in xrange(LN):
     ain = Ain[i].split()
-    nod = len(ain)
+    nod = len(ain)     # number of columns
 
-trn,mn,rng = [],[],[]
+trn,mn,rng = [],[],[] #creating empty list of train, minimum, range (=max-min)
 for i in xrange(nod):
     trn.append([])
     rng.append(0.0)
@@ -34,23 +37,19 @@ for i in xrange(LN):
     ain = Ain[i].split()
     if len(ain) > 0:
         for j in xrange(nod):
-            trn[j].append(ain[j])
+            trn[j].append(float(ain[j]))
 
 for i in xrange(nod):
-    rng[i] = float(max(trn[i])) - float(min(trn[i]))
-    mn[i] = float(min(trn[i]))
-
-for i in xrange(nod):
-    if mn[i] == 0.0:
-        mn[i] = mn[i]+0.00001
+    rng[i] = max(trn[i]) - min(trn[i])
+    mn[i] = min(trn[i])
 
 #---------------------------------------
-# This block is for calculating scaled "c"
+# This block is for calculating rescaled "c"
 #---------------------------------------
 
-fc = open("HFCO.c","r")
-C_old = fc.readlines()
-fc.close()
+fc_in = open("HFCO.c","r")
+C_old = fc_in.readlines()
+fc_in.close()
 c = C_old[0].split()[0]
 
 fc_new = open("C","w")
@@ -66,7 +65,7 @@ fc_new.close()
 f_iw_in = open("HFCO.IW","r")
 IW_old = f_iw_in.readlines()
 f_iw_in.close()
-no_NN = len(IW_old) #nod-1 #len(IW_old[0].split())
+no_NN = len(IW_old) # number of Neurons
 print "NN=",len(IW_old)
 
 iw_i = []
@@ -77,17 +76,18 @@ for i in xrange(no_NN):
     iw_i.append(iw_j)
     
 f_rd = open("rd","w")
-
 for i in xrange(no_NN):
     iw_old = IW_old[i].split()
     if len(iw_old) > 0:
         d1 = 1.0
         for j in xrange(nod-1):
             iw_i[i][j] = 2.0*float(iw_old[j])/rng[j]
-            d2 = 2.0*float(iw_old[j])*mn[j]/rng[j] + float(iw_old[j])
-            d3 = math.exp(-1.0*d2)
-            d1 = d3*d1
-        f_rd.write("%32.15f "%d1)
+            #d2 = 2.0*float(iw_old[j])*mn[j]/rng[j] + float(iw_old[j])
+            d1 = d1*math.exp(-1.0*(2.0*float(iw_old[j])*mn[j]/rng[j] + float(iw_old[j])))
+            #d3 = math.exp(-1.0*d2)
+            #d1 = d3*d1
+        d2 = d1*0.50*rng[nod-1]
+        f_rd.write("%32.15f "%d2)
 f_rd.close()
 
 f_iw_out = open("IW","w")
