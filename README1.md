@@ -26,4 +26,13 @@ $ rm -r folder_name
 $ rm -rf folder_name
 $ rm file_name
 ```
+## Step-by-step
+1. step 1 ( [How To](#how-to)
+2. step 2
+3. step 3
+4. step 4
 
+## How To
+```sh
+This is how you run MCTDH
+```
