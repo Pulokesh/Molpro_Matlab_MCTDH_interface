@@ -19,5 +19,11 @@ How to run simple mmatlab calculation
 ```sh
 How to run simple mctdh calculation
 ```
-
+```sh
+$ cd folder_name
+$ vi file_name
+$ rm -r folder_name
+$ rm -rf folder_name
+$ rm file_name
+```
 
