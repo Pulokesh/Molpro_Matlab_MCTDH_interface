@@ -10,7 +10,7 @@ This interface start with electronic structure calculation using Molpro, then po
 <!-- Don’t remove or change the comment below – that can break automatic updates. More info at <http://npm.im/doxie.inject>. -->
 <!-- @doxie.inject end toc -->
 View another similar .md file
-*[README1.md][readme1]
+* [README1.md][readme1]
 
 <!-- @doxie.inject start -->
 <!-- Don’t remove or change the comment above – that can break automatic updates. -->
