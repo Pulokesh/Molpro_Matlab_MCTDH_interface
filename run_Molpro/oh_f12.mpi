@@ -1,0 +1,16 @@
+***,OH ground state opt & freq at RCCSD(T)/vtz-f12
+
+memory,500,m
+
+symmetry,nosym
+geometry={O;
+H,O,roh}
+
+roh = 0.95 Angstrom
+
+basis=vtz-f12
+rhf;
+rccsd(t)-f12;
+optg;
+frequencies;
+---

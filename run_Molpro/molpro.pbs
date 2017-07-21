@@ -1,0 +1,61 @@
+#!/bin/bash
+#PBS -S /bin/bash
+#PBS -l walltime=150:50:00
+#PBS -l pmem=5gb,procs=8,file=24gb
+#PBS -m bea
+#PBS -r n
+
+cd $PBS_O_WORKDIR
+echo "Current working directory is `pwd`"
+echo "Starting run at: `date`"
+
+echo "my PBS_NODEFILE contains:"
+cat $PBS_NODEFILE
+
+#Create Scratch directory
+#SCRATCHDR=/global/scratch/$USER/${PBS_JOBID}
+#mkdir $SCRATCHDR
+#cd $SCRATCHDR
+
+# GAS seems that for GA version, shared filesystem is not needed. 
+# so it does not have to be in $SCRATCHDIR ; I've used $TMPDIR 
+# as proviede by Torque. The only question is where would it put incomplete
+# files good for restarts? Is this TMPDIR4? Or current WORKDIR?
+# perhaps one sould use -I and -W flags to molpro command to store the data
+# somewhere on /global/scratch
+
+echo "TMPDIR is $TMPDIR"
+export TMPDIR4=$TMPDIR
+
+#Copy your input files from the original directory to the scrach directory
+#cp $PBS_O_WORKDIR/$INPUT_FILE.mpi .
+#cp $PBS_O_WORKDIR/$INPUT_FILE.geom .
+
+#Add molpro directory to the path
+#GAS note that it now depends on GA shared library which must be added to the path
+
+module load intel
+module load intel/ompi/1.6.1
+
+export PATH=$PATH:/home/abrown/molpro-12.1-ga/molprop_2012_1_Linux_x86_64_i8/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/global/software/ga-5.2-intel-64/lib
+
+#Run molpro in parallel
+# GAS -S ga is needed to tell it is not shared file; number of cores etc.
+# should be taken automatically from Torque by OpenMPI's mpiexec.
+# -m should control the memory in 8byte words: for pmem 1gb, 8procs it would be about 1gwords?
+
+export ARMCI_DEFAULT_SHMMAX=1800
+molpro -v -m 5000m -S ga trans_av5z.mpi 
+
+#Copy any output files back to home directory
+#gzip *
+#cp *.gz $PBS_O_WORKDIR
+
+#Remove directories from scratch directory
+##/bin/rm -R $SCRATCHDR
+# GAS $TMPDIR would be removed automatically by Torque
+# so the above isnt needed?
+
+
+#End of building Molpro job creation and submission file

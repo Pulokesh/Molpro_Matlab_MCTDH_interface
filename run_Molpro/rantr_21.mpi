@@ -1,0 +1,44 @@
+***, HONO CCSD(T)-F12/vtz-f12 SCF calculation using external geometry file
+
+memory,150,m
+
+symmetry,nosym
+geometry={H;
+O,H,roh(i);
+N,O,rno(i),H,anoh(i);
+O,N,ron(i),O,aono(i),H,aphi(i)}
+
+include rantr_21.geom
+!********************************
+!basis={spd,1,vtz;c;spd,2,vtz;c;sp,3,vtz;c;spd,4,vtz;c;}
+!********************************
+
+
+!********************************
+do i=1,500
+ron(i)=R1(i)
+rno(i)=R2(i)                  !save r2 for this geometry
+roh(i)=R3(i)                  !save r2 for this geometry
+aono(i)=R4(i)                  !save r2 for this geometry
+anoh(i)=R5(i)                  !save r2 for this geometry
+aphi(i)=R6(i)                  !save r2 for this geometry
+
+
+basis=vtz-f12;
+hf;
+escf(i)=energy
+ccsd(t)-f12;
+ef12a(i)=energy(1)
+ef12b(i)=energy(2)
+enddo                                 !end of do loop rcf
+
+!****************************************
+!    specific for output data in table
+!****************************************
+{table, ron,rno,roh,aono,anoh,aphi,escf,ef12a,ef12b    !produce a table with results
+head, ron,rno,roh,aono,anoh,aphi,escf,fe12a,ef12b   !modify column headers for table
+save,table_rantr_21.out                !save the table in file h2o.tab
+title,Results for HFCO config vs V, basis $basis   !title for table
+!sort,3,1,2
+}                           !sort table
+---

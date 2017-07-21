@@ -1,0 +1,50 @@
+***, trans-HONO ccsd-f12/vtz 1D cut along r1 (O-N)
+
+memory,15,m
+
+symmetry,nosym
+geometry={H;
+O,H,roh(i);
+N,O,rno(i),H,anoh(i);
+O,N,ron(i),O,aono(i),H,aphi(i)}
+
+coord1 =[1.85,1.95,2.025,2.075,2.1,2.15,2.2,2.21094,2.25,2.3,2.35,2.4,2.5,2.65]
+
+i=0
+do ir1 = 1,#coord1
+i=i+1
+!********************************
+!********************************
+!Equilibrium geometry at CCSD(T)/AVTZ
+!********************************
+!ron(i)=2.21094
+rno(i)=2.6814843
+roh(i)=1.8254502
+aono(i)=110.64
+anoh(i)=102.27
+aphi(i)=180.0
+!******************
+ron(i)=coord1(ir1)
+!rno(i)=coord1(ir1)
+!roh(i)=coord1(ir1)
+!aono(i)=coord1(ir1)
+!anoh(i)=coord1(ir1)
+!aphi(i)=coord1(ir1)
+!*************************
+
+basis=vtz-f12;
+hf;
+escf(i)=energy
+ccsd(t)-f12;
+ef12a(i)=energy(1)
+ef12b(i)=energy(2)
+enddo
+!****************************************
+!    specific for output data in table
+!****************************************
+{table, ron,rno,roh,aono,anoh,aphi,escf,ef12a,ef12b    !produce a table with results
+head, ron,rno,roh,aono,anoh,aphi,escf,ef12a,ef12b   !modify column headers for table
+save,table_r1.out                !save the table in file h2o.tab
+title,Results for HFCO config vs V, basis $basis   !title for table
+}                           !sort table
+---

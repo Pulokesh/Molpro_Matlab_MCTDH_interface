@@ -1,0 +1,26 @@
+***, HONO cis to trans TS optimization at CCSD(T)-F12/vtz-F12 using MP2 hessian
+
+memory,15,m
+
+symmetry,nosym
+geometry={H;
+O 1 R3
+N 2 R2 1 A2
+O 3 R1 2 A1 1 D}
+      
+R3=0.967,ANG
+R2=1.493,ANG
+A2=103.308
+R1=1.1611,ANG
+A1=111.089
+D=90.00
+ 
+basis=vtz-f12
+
+hf;
+ccsd(t)-f12;
+optg,root=2,hessproc=runmp2;
+frequencies;
+
+runmp2={hf;mp2}
+---

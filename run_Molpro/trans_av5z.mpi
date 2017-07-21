@@ -1,0 +1,24 @@
+***, HONO CCSD(T)/AV5Z  geometry optimization and harmonic frequency computations
+
+memory,250,m
+
+geometry={H;
+O,H,R3;
+N,O,R2,H,A2;
+O,N,R1,O,A1,H,180.00}
+
+R3=0.966 Angstrom
+R2=1.419 Angstrom
+A2=102.27 Degrees
+R1=1.17 Angstrom
+A1=110.69 Degrees
+
+basis=AV5Z
+
+hf;
+ccsd(t);
+eccsd=energc
+eccsdt=energy
+optg;
+frequencies;
+---
