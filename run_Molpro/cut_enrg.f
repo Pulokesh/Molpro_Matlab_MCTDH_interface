@@ -3,23 +3,13 @@ c* Copyright (C) 2016 Ekadashi Pradhan
 c*
 c******************************************************
 
-      program gencoord
-      implicit none
-cccccc
-cccc
-cc
-c    ******** modification by me(ekadashi) ********
-c
-c
+	program cut_energy
+
+	implicit none
 	double precision a(100000,7),p,q
 	integer i,j,n
 
-c
-c
-c
-
 ccccccccccccccccccccccccccccccccccccccc
-
 	write(6,*)'no of data='
 	read(5,*)n
 	

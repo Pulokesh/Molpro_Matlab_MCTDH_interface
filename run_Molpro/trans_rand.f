@@ -3,13 +3,12 @@ c* Copyright (C) 2016 Ekadashi Pradhan
 c*
 c******************************************************
 
-      program ranpts
+	program ranpts
 
 c       this is for generating random sample points
 c       based on sum-over 1D cut PES of HONO
 c       range.inp is the input file and trainset is the output
 c       where randomly selected data points are stored
-
 
         double precision max(10),min(10),d_rand
         double precision Ecut,count,target,countrnd,p
@@ -96,21 +95,17 @@ c       Energy filter is now utilized for sampling
 
         end program
 
-
-
-
 cccccccccccccccccccccccccccccccccccccccccccccccccccc
       subroutine hono(r1,r2,r3,o1,o2,phi,v)
 c==================================================
 c     r1 distance N=O   r2 distance O-N  r3 distance O-H
 c     o1 angle O-N-O    o2 angle H-O-N
 c     phi dihedral angle
-c     *********************************************
 c
+c     *********************************************
 c     r1, r2, and r3 are fitted with Morse function
 c     cosQ1, cosQ2, and Phi are fitted with fifth or more order polynomial
 c
-c     *********************************************
 c==================================================
 	Implicit none
 	
@@ -121,7 +116,6 @@ c==================================================
 	double precision v_phi,A01,A1,A2,A3,A4
 	integer i,j,k
 
-
 c******************************************************
 	x(1) = r1
 	x(2) = r2
@@ -129,18 +123,17 @@ c******************************************************
 	x(4) = o1
 	x(5) = o2
 	x(6) = phi
-c******************************************************
 
 c******************************************************
 	Xe(1) = 2.210949d0 
 	Xe(2) = 2.6814843d0
 	Xe(3) = 1.82545020d0
-c******************************************************
 
 c******************************************************
 	De(1) = 0.234724d0
 	De(2) = 0.0712359d0
 	De(3) = 0.177202d0
+
 c******************************************************
 	A0(1) = 1.36128d0
 	A0(2) = 1.21988d0
@@ -159,18 +152,13 @@ c******************************************************
 	C(2,4) = 0.0478834d0
 	C(2,5) = 0.0299907d0
 	
-
 	A01 = 0.0103183d0
 	A1  = 0.00118698d0
 	A2  = -0.0096204d0
 	A3  = -0.000340861d0
 	A4  = 0.000142621d0
-
-
 	
 c******************************************************
-
-
 	v_str = 0.0d0
 	do i=1,3
 	V_1d = De(i)*(1-exp(-1.0d0*A0(i)*(x(i)-Xe(i))))**2
@@ -198,7 +186,6 @@ c	write(6,*)v
 	return
 	end
 	
-
 ccccccccccccccccccccccccccc
 ccccccccccccccccccccccccccccccc
 cccccccccccccccccccccccccccccccccccc
