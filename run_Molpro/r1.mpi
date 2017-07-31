@@ -45,6 +45,6 @@ enddo
 {table, ron,rno,roh,aono,anoh,aphi,escf,ef12a,ef12b    !produce a table with results
 head, ron,rno,roh,aono,anoh,aphi,escf,ef12a,ef12b   !modify column headers for table
 save,table_r1.out                !save the table in file h2o.tab
-title,Results for HFCO config vs V, basis $basis   !title for table
+title,Results for HONO config vs V, basis $basis   !title for table
 }                           !sort table
 ---

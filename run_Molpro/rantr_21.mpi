@@ -38,7 +38,7 @@ enddo                                 !end of do loop rcf
 {table, ron,rno,roh,aono,anoh,aphi,escf,ef12a,ef12b    !produce a table with results
 head, ron,rno,roh,aono,anoh,aphi,escf,fe12a,ef12b   !modify column headers for table
 save,table_rantr_21.out                !save the table in file h2o.tab
-title,Results for HFCO config vs V, basis $basis   !title for table
+title,Results for HONO config vs V, basis $basis   !title for table
 !sort,3,1,2
 }                           !sort table
 ---
